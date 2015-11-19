@@ -6,12 +6,12 @@
   "scripts": {
     "validate": "npm ls --depth 0",
     "start": "webpack-dev-server",
-    "lint": "./node_modules/eslint/bin/eslint.js src test example",
-    "test": "./node_modules/karma-cli/bin/karma start test/karma.config.js --single-run",
-    "test-watch": "./node_modules/karma-cli/bin/karma start test/karma.config.js",
-    "test-cov": "npm test",
+    "lint": "make lint",
+    "test": "make test",
+    "test-watch": "make watch",
+    "test-cov": "make test",
     "posttest-cov": "open ./coverage/phantomjs/lcov-report/index.html",
-    "build": "make app"
+    "build": "make"
   },
   "keywords": [
     "DHIS2",
@@ -41,6 +41,7 @@
     "karma-sinon": "1.0.4",
     "karma-sinon-chai": "1.1.0",
     "karma-sourcemap-loader": "0.3.6",
+    "karma-spec-reporter": "0.0.22",
     "karma-webpack": "1.7.0",
     "mocha": "2.3.4",
     "node-sass": "3.3.2",
@@ -59,5 +60,16 @@
     "test",
     "lint",
     "validate"
-  ]
+  ],
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhis2/app-skeleton.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dhis2/app-skeleton/issues"
+  },
+  "homepage": "https://github.com/dhis2/app-skeleton#readme"
 }

@@ -1,7 +1,6 @@
 var path = require('path');
 
 
-console.log(path.resolve('src/'));
 module.exports = function karmaConfigHandler(config) {
     config.set({
         browsers: [ 'PhantomJS' ], // run in Headless browser PhantomJS
@@ -13,17 +12,16 @@ module.exports = function karmaConfigHandler(config) {
             'sinon-chai' // Assertions for mocks and spies
         ],
         files: [
-            '../node_modules/phantomjs-polyfill/bind-polyfill.js',
-            './googlemapsapi.js',
-            'tests.webpack.js', // just load this file
+            '../../node_modules/phantomjs-polyfill/bind-polyfill.js', // Adds Function.prototype.bind that is missing from phantomjs
+            './tests.webpack.js', // just load this file as entry for webpack
         ],
         preprocessors: {
             'tests.webpack.js': [ 'webpack' ], // preprocess with webpack and our sourcemap loader
         },
-        reporters: [ 'dots', 'coverage' ], // report results in this format
+        reporters: [ 'spec', 'coverage' ], // report results in this format
         coverageReporter: {
             type: 'lcov',
-            dir: '../coverage',
+            dir: '../../coverage',
             subdir: function simplifyBrowsername(browser) {
                 // normalization process to keep a consistent browser name accross different OS
                 return browser.toLowerCase().split(/[ /-]/)[0];
@@ -37,8 +35,8 @@ module.exports = function karmaConfigHandler(config) {
                     {
                         test: /\.js$/,
                         exclude: [
-                            path.resolve('src/'),
-                            path.resolve('node_modules/')
+                            path.resolve('src'),
+                            path.resolve('node_modules')
                         ],
                         loader: 'babel',
                         query: {
@@ -48,7 +46,7 @@ module.exports = function karmaConfigHandler(config) {
                     // transpile and instrument only testing sources with isparta
                     {
                         test: /\.js$/,
-                        include: path.resolve('src/'),
+                        include: path.resolve('src'),
                         loader: 'isparta',
                     },
                 ],
