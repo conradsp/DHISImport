@@ -1,0 +1,9 @@
+.idea
+node_modules
+build
+*.iml
+npm-debug.log
+coverage
+
+.jshintignore
+.jshintrc
