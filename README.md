@@ -52,4 +52,9 @@ To generate a coverage report for the tests
 npm run coverage
 ```
 
+To check the code style for both the JS and SCSS files run
+```sh
+npm run lint
+```
+
 
