@@ -1,5 +1,4 @@
 import React from 'react';
-import {render} from 'react-dom';
 import log from 'loglevel';
 
 import HeaderBar from 'd2-ui/lib/header-bar/HeaderBar.component';
@@ -7,6 +6,7 @@ import Sidebar from 'd2-ui/lib/sidebar/Sidebar.component';
 
 export default React.createClass({
     propTypes: {
+        name: React.PropTypes.string,
         d2: React.PropTypes.object,
     },
 
@@ -23,7 +23,7 @@ export default React.createClass({
     getChildContext() {
         return {
             d2: this.props.d2,
-        }
+        };
     },
 
     _sidebarItemClicked(sideBarItemKey) {
@@ -31,9 +31,9 @@ export default React.createClass({
     },
 
     render() {
-        const  sideBarSections = [
-            {key: 'item1', label: 'Item 1'},
-            {key: 'item2', label: 'Item 2'},
+        const sideBarSections = [
+            { key: 'item1', label: 'Item 1' },
+            { key: 'item2', label: 'Item 2' },
         ];
 
         return (

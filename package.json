@@ -8,7 +8,7 @@
     "build": "webpack --config webpack.config.prod.js && cp src/index.html build/ && cp node_modules/jquery/dist/jquery.min.js build/ && cp node_modules/babel-polyfill/dist/polyfill.min.js build/ && cp src/manifest.webapp build/",
     "test": "mocha --reporter spec --compilers js:babel-core/register --require config/setup.js --recursive test",
     "test-watch": "mocha --reporter spec --compilers js:babel-core/register --require config/setup.js --recursive test --watch",
-    "lint": "eslint --fix src && ./node_modules/eslint/bin/eslint.js --env node,mocha --global expect,sinon --rule 'no-unused-expressions: 0' test && scss-lint",
+    "lint": "eslint --fix src && ./node_modules/eslint/bin/eslint.js --env node,mocha --global expect,sinon,spy,stub --rule 'no-unused-expressions: 0' test && scss-lint",
     "validate": "npm ls",
     "start": "webpack-dev-server"
   },

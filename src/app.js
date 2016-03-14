@@ -1,5 +1,5 @@
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 import log from 'loglevel';
 import { init, config, getManifest } from 'd2/lib/d2';
 

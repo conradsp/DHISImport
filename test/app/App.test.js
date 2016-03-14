@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import { shallow } from 'enzyme';
 import log from 'loglevel';
 
 import App from '../../src/app/App';
@@ -42,8 +42,8 @@ describe('App', () => {
         const sidebarSections = sidebarComponent.props().sections;
 
         expect(sidebarSections).to.deep.equal([
-            {key: 'item1', label: 'Item 1'},
-            {key: 'item2', label: 'Item 2'},
+            { key: 'item1', label: 'Item 1' },
+            { key: 'item2', label: 'Item 2' },
         ]);
     });
 
