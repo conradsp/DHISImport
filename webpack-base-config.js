@@ -13,30 +13,24 @@ module.exports = {
     module: {
         // Loaders that are used to load files
         loaders: [
+            // Babel loader to transpile ES2015 to ES5 code
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 loader: 'babel',
-                query: {
-                    stage: 2,
-                },
             },
+
+            // Css loader to load stylesheets
             {
                 test: /\.css$/,
                 loader: 'style-loader!css-loader',
             },
+
+            // Scss loader to allow webpack to transform scss code to css
             {
                 test: /\.scss$/,
                 loader: 'style!css!sass',
             },
         ],
     },
-    plugins: [
-        // Plugins to extend webpack functionality (https://webpack.github.io/docs/plugins.html)
-        /* Example that provides `fetch` as a global variable
-        new webpack.ProvidePlugin({
-            'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-        })
-        */
-    ],
 };

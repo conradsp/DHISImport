@@ -1,9 +1,12 @@
+# Jetbrains files
 .idea
+*.iml
+
+# Project folders/dependencies
 node_modules
 build
-*.iml
-npm-debug.log
 coverage
 
-.jshintignore
-.jshintrc
+# Misc files
+npm-debug.log
+
