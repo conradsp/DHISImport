@@ -1,6 +1,11 @@
 @import '../../node_modules/d2-ui/lib/css/HeaderBar.css';
 
-$left-bar-width: 256px;
+$left-bar-width: 295px;
+
+html {
+  background-color: #f3f3f3;
+  font-family: Roboto, Arial, sans-serif;
+}
 
 .app-wrapper {
   margin-top: 4rem;

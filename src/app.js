@@ -1,3 +1,8 @@
+const dhisDevConfig = DHIS_CONFIG; // eslint-disable-line
+if (process.env.NODE_ENV !== 'production') {
+    jQuery.ajaxSetup({ headers: { Authorization: dhisDevConfig.authorization } }); // eslint-disable-line
+}
+
 import React from 'react';
 import { render } from 'react-dom';
 import log from 'loglevel';
@@ -46,13 +51,8 @@ function startApp(d2) {
 // can use it to access the api, translations etc.
 getManifest('./manifest.webapp')
     .then(manifest => {
-        config.baseUrl = `${manifest.getBaseUrl()}/api`;
-
-        // Set the baseUrl to localhost if we are in dev mode
-        if (process.env.NODE_ENV !== 'production') {
-            config.baseUrl = 'http://localhost:8080/dhis/api';
-            dhis2.settings.baseUrl = 'http://localhost:8080/dhis';
-        }
+        const baseUrl = process.env.NODE_ENV === 'production' ? manifest.getBaseUrl() : dhisDevConfig.baseUrl;
+        config.baseUrl = `${baseUrl}/api`;
     })
     .then(init)
     .then(startApp)
