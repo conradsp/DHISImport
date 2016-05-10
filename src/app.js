@@ -1,4 +1,11 @@
+// When the app is built for development, DHIS_CONFIG is replaced with the config read from $DHIS2_HOME/config.js[on]
+// When the app is built for production, process.env.NODE_ENV is replaced with the string 'production', and
+// DHIS_CONFIG is replaced with an empty object
 const dhisDevConfig = DHIS_CONFIG; // eslint-disable-line
+
+// This code will only be included in non-production builds of the app
+// It sets up the Authorization header to be used during CORS requests
+// This way we can develop using webpack without having to install the application into DHIS2.
 if (process.env.NODE_ENV !== 'production') {
     jQuery.ajaxSetup({ headers: { Authorization: dhisDevConfig.authorization } }); // eslint-disable-line
 }
@@ -8,7 +15,6 @@ import { render } from 'react-dom';
 import log from 'loglevel';
 import { init, config, getManifest } from 'd2/lib/d2';
 
-import dhis2 from 'd2-ui/lib/header-bar/dhis2';
 import LoadingMask from 'd2-ui/lib/loading-mask/LoadingMask.component';
 
 // The react-tap-event-plugin is required by material-ui to make touch screens work properly with onClick events
@@ -16,18 +22,6 @@ import 'react-tap-event-plugin';
 
 import App from './app/App';
 import './app/app.scss';
-
-// This code will only be included in non-production builds of the app
-// It sets up the Authorization header to be used during CORS requests
-// This way we can develop using webpack without having to install
-// the application into DHIS2.
-if (process.env.NODE_ENV !== 'production') {
-    jQuery.ajaxSetup({ // eslint-disable-line no-undef
-        headers: {
-            Authorization: `Basic ${btoa('admin:district')}`,
-        },
-    });
-}
 
 // Render the a LoadingMask to show the user the app is in loading
 // The consecutive render after we did our setup will replace this loading mask
