@@ -1,6 +1,6 @@
 {
   "name": "app-skeleton",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Skeleton app for a DHIS2 web app",
   "main": "src/index.html",
   "scripts": {
