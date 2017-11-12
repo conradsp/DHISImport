@@ -18,10 +18,12 @@ import { init, config, getManifest } from 'd2/lib/d2';
 import LoadingMask from 'd2-ui/lib/loading-mask/LoadingMask.component';
 
 // The react-tap-event-plugin is required by material-ui to make touch screens work properly with onClick events
-import 'react-tap-event-plugin';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import App from './app/App';
 import './app/app.scss';
+
+//injectTapEventPlugin();
 
 // Render the a LoadingMask to show the user the app is in loading
 // The consecutive render after we did our setup will replace this loading mask
