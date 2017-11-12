@@ -9,20 +9,6 @@ npm install
 ```
 
 To set up your DHIS2 instance to work with the development service you will need to add the development servers address to the CORS whitelist. You can do this within the DHIS2 Settings app under the _access_ tab. On the access tab add `http://localhost:8081` to the CORS Whitelist.
-> The starter app will look for a DHIS 2 development instance configuration in
-> `$DHIS2_HOME/config`. So for example if your `DHIS2_HOME` environment variable is
-> set to `~/.dhis2`, the starter app will look for `~/.dhis2/config.js` and then
-> `~/.dhis2/config.json` and load the first one it can find.
->
-> The config should export an object with the properties `baseUrl` and
-> `authorization`, where authorization is the base64 encoding of your username and
-> password. You can obtain this value by opening the console in your browser and
-> typing `btoa('user:pass')`.
->
-> If no config is found, the default `baseUrl` is `http://localhost:8080/dhis` and
-> the default username and password is `admin` and `district`, respectively.
->
-> See `webpack.config.js` for details.
 
 This should enable you to run the following node commands:
 
@@ -50,6 +36,24 @@ To check the code style for both the JS and SCSS files run
 ```sh
 npm run lint
 ```
+# Running the application
+
+The home page allows for the configuration of global data needed by DHIS.
+Create an organizational unit and at least one data element.
+
+The Create Program button will do all of the work to create a tracker program
+in DHIS. Once this is created, assign all data elements to this tracker program
+(all data elements will be assigned to the first stage).
+
+After configuration is complete, use the import tab. Select a json file to read. 
+These files are expected to be in a standard FHIR format (a root object that contains
+multiple entries. Each entry has a resource object that contains the information we
+are interested in tracking).
+
+After the file is read, press the import button to create the tracker event data
+in DHIS. The data can now be used in the 'Event Visualization' portal in DHIS.
+
+Future functionality: add data visualization within this application
 
 # Tools etc.
 
