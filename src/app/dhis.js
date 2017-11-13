@@ -8,7 +8,7 @@ export const dhisRead = async(url) => {
                 Authorization: `Basic ${btoa('admin:district')}`,
             },
             }).then(res =>{
-                return res.json;
+                return res.json();
             }).catch(err => {
                 console.log(err);
             })

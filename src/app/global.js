@@ -13,6 +13,7 @@ export class GlobalData extends Component {
         super(props);
         this.state = {
           trackedEntityAttributes: null,
+          userRole: null,
           newOrg: {},
           newElement: {},
           newStage: {},
@@ -33,6 +34,11 @@ export class GlobalData extends Component {
         dhisRead('me.json')
         .then(json => {
             this.props.setUser(json);
+            // Load the user role - we will need it for creating the program
+            dhisRead('metadata.json?assumeTrue=false&userRoles=true')
+                .then(json=>{
+                    this.setState({userRole: json.userRoles[0]});
+                })
         })
     }
 
@@ -125,7 +131,7 @@ export class GlobalData extends Component {
 
     createTrackerProgram() {
         var {orgs, user} = this.props;
-        var {trackedEntityAttributes} = this.state;
+        var {trackedEntityAttributes, userRole} = this.state;
 
         var dhisPayload = {"programs" : [{"name":"FHIR Weight", "shortName":"FHIR Weight", "categoryCombination": "NONE", "programType": "WITHOUT_REGISTRATION", "completeEventsExpiryDays":0, "expiryDays":0, "programStages":[],"organisationUnits":[{"id":orgs[0].id}],"user":{"id":user.id}}]};
 
@@ -146,12 +152,11 @@ export class GlobalData extends Component {
                             dhisPayload = {"programs": [{"id":progId, "programStages":[{"id":json.programStages[0].id}]}]};
                             dhisWrite('metadata.json?importStrategy=UPDATE&mergeMode=MERGE', JSON.stringify(dhisPayload))
                             .then(res => {
-                                this.loadPrograms();
-                                console.log(user);
                                 // Update the current user role and add the program
-                                dhisPayload = {"userRoles": [{"id":user.userCredentials.userRoles[0].id, "programs":[{"id":progId}]}]};
+                                dhisPayload = {"userRoles": [{"id":userRole.id, "name":"Superuser", "authorities":userRole.authorities, "programs":[{"id":progId }]}]};
                                 dhisWrite('metadata.json?importStrategy=UPDATE&mergeMode=MERGE', JSON.stringify(dhisPayload))
                                 .then(res => {
+                                    this.loadPrograms();
                                 });
                             })
                         });
